@@ -1,0 +1,33 @@
+.game {
+    width: 312px;
+    text-align: center;
+    font-family: Tahoma, serif;
+    color: peachpuff;
+    margin: 50px auto;
+}
+
+.gameBarTitle {
+    background: #ff2255;
+    padding: 5px 0;
+    margin: 5px 0;
+}
+
+span {
+    color: #fa0;
+}
+
+.square {
+    width: 100px;
+    height: 100px;
+    background: #ff2255;
+    float: left;
+    margin: 2px;
+    font-size: 70px;
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+.square:hover {
+    background: #000000;
+    cursor: pointer;
+}
