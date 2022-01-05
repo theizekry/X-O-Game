@@ -1,4 +1,3 @@
-
 let inGame = true;
 let currentPlayer = 'X';
 let gameBarTitle = document.querySelector('.gameBarTitle');
@@ -35,11 +34,8 @@ function game(square_id)
 }
 
 function isLastPlayerWins(oddResult) {
-    return (
-        oddResult.length === 3 &&
-        oddResult[0] === oddResult[1] &&
-        oddResult[1] === oddResult[2]
-    );
+    return (oddResult.length === 3 &&
+        oddResult.every(v => v === oddResult[0]));
 }
 
 function getOddResult(odd) {
@@ -58,7 +54,21 @@ function getOddResult(odd) {
     return oddResult;
 }
 
-function finalizingGameAndShowResult() {
+function checkWinner() {
+    // Get all available odds that can make someone Winning the Game.
+    let odds = getOdds();
+
+    for (let i = 0; i < odds.length; i++) {
+
+        let oddResult = getOddResult(odds[i]);
+
+        if (isLastPlayerWins(oddResult)) {
+            finalizingGameAndShowResult(odds[i]); // hint the odds Result has the ids
+        }
+    }
+}
+
+function finalizingGameAndShowResult(successOdd) {
 
     // Stop the Game mode.
     inGame = false;
@@ -77,20 +87,12 @@ function finalizingGameAndShowResult() {
     setTimeout(function () {
         location.reload();
     }, 4000);
-}
 
-function checkWinner() {
-    // Get all available odds that can make someone Winning the Game.
-    let odds = getOdds();
+    // Mark the Success Odd with a black background color.
 
-    for (let i = 0; i < odds.length; i++) {
-
-        let oddResult = getOddResult(odds[i]);
-
-        if (isLastPlayerWins(oddResult)) {
-            finalizingGameAndShowResult();
-        }
-    }
+    successOdd.forEach(function(square_id) {
+        document.getElementById('square-' + square_id).style.backgroundColor = '#000';
+    })
 }
 
 /**
