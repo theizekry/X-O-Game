@@ -6,10 +6,22 @@
     <link rel="stylesheet" href="styles/game.css">
     <link rel="icon" type="image/x-icon" href="/images/img.png">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+        }
+
+        section{
+            height: 100vh;
+            width: 100%;
+            background: black;
+        }
+    </style>
+
 </head>
 
 <body class="fireworks-container">
-    <div class="game fireworks-container">
+    <div class="game">
 
         <div class="gameBarTitle"><span> [ X / O ] </span> Game </div>
 
@@ -26,6 +38,9 @@
         <div class="square" id="square-9" onclick="game(this.id)"></div>
     </div>
 
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.fireworks.js"></script>
     <script src="js/game.js"></script>
+
 </body>
 </html>

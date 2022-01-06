@@ -91,6 +91,22 @@ function finalizingGameAndShowResult(successOdd) {
     // Update the Game-bar gameBarTitle message!
     gameBarTitle.innerHTML = winnerPlayer + ' is Winner';
 
+    // Mark the Success Odd with a black background color.
+    successOdd.forEach(function(square_id) {
+        document
+            .getElementById('square-' + square_id)
+            .style
+            .backgroundColor = '#000';
+    })
+
+    $('.fireworks-container').fireworks({
+        opacity: 0.9,
+        width: '100%',
+        height: '100%',
+        speed: 5000,
+        acceleration: 1.10
+    });
+
     // Simple Loader.
     setInterval(function () {
         gameBarTitle.innerHTML += '.'
@@ -99,15 +115,7 @@ function finalizingGameAndShowResult(successOdd) {
     // Finally, Reload the Page to start a new Game.
     setTimeout(function () {
         location.reload();
-    }, 4000);
-
-    // Mark the Success Odd with a black background color.
-    successOdd.forEach(function(square_id) {
-        document
-            .getElementById('square-' + square_id)
-            .style
-            .backgroundColor = '#000';
-    })
+    }, 5000);
 }
 
 function endGameWithDrawResult()
