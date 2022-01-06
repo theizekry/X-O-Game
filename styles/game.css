@@ -7,19 +7,20 @@
 }
 
 .gameBarTitle {
-    background: #ff2255;
+    background: #2268ff;
     padding: 5px 0;
     margin: 5px 0;
+    font-weight: bold;
 }
 
 span {
-    color: #fa0;
+    color: #000000;
 }
 
 .square {
     width: 100px;
     height: 100px;
-    background: #ff2255;
+    background: #2268ff;
     float: left;
     margin: 2px;
     font-size: 70px;

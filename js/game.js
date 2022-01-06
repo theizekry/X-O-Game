@@ -45,7 +45,7 @@ function game(square_id)
  *
  * @param oddResult
  *
- * @returns {false|*}
+ * @returns boolean
  */
 function isLastPlayerWins(oddResult) {
     return (oddResult.length === 3 &&
@@ -122,6 +122,13 @@ function finalizingGameAndShowResult(successOdd) {
             .backgroundColor = '#000';
     })
 
+    celebrate();
+
+    loadingNewGame();
+}
+
+function celebrate()
+{
     $('.fireworks-container').fireworks({
         opacity: 0.9,
         width: '100%',
@@ -129,8 +136,6 @@ function finalizingGameAndShowResult(successOdd) {
         speed: 5000,
         acceleration: 1.10
     });
-
-    loadingNewGame();
 }
 
 function loadingNewGame()
@@ -143,7 +148,7 @@ function loadingNewGame()
     // Finally, Reload the Page to start a new Game.
     setTimeout(function () {
         location.reload();
-    }, 5000);
+    }, 10000);
 }
 
 function endGameWithDrawResult()
