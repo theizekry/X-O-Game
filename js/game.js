@@ -31,17 +31,35 @@ function game(square_id)
     }
 
     // Increment the filled squares count.
+    // that helps to check if the game is still in,
+    // in another word, ( to determine next player can still play or all squares is filled )
     filledSquaresCount++;
 
     // Checking the Winner after Last Play.
     checkWinner();
 }
 
+/**
+ * Determine if the Last Player is wins.
+ * by checking if the odd result is passed one of the conditions ( Odds ).
+ *
+ * @param oddResult
+ *
+ * @returns {false|*}
+ */
 function isLastPlayerWins(oddResult) {
     return (oddResult.length === 3 &&
         oddResult.every(v => v === oddResult[0]));
 }
 
+/**
+ * Determine if the Last Player is wins.
+ * by checking if the odd result is passed one of the conditions ( Odds ).
+ *
+ * @param odd | the odd that we need to get the result for.
+ *
+ * @returns array
+ */
 function getOddResult(odd) {
 
     let oddResult = [];
@@ -58,6 +76,11 @@ function getOddResult(odd) {
     return oddResult;
 }
 
+/**
+ * checking if we've someone Winning the Game!
+ *
+ * @returns void
+ */
 function checkWinner() {
 
     // Check if the Game not Closed.
@@ -76,7 +99,7 @@ function checkWinner() {
         let oddResult = getOddResult(odds[i]);
 
         if (isLastPlayerWins(oddResult)) {
-            finalizingGameAndShowResult(odds[i]); // hint the odds Result has the ids
+            finalizingGameAndShowResult(odds[i]); // hint the odds Result has the ids.
         }
     }
 }
@@ -107,6 +130,11 @@ function finalizingGameAndShowResult(successOdd) {
         acceleration: 1.10
     });
 
+    loadingNewGame();
+}
+
+function loadingNewGame()
+{
     // Simple Loader.
     setInterval(function () {
         gameBarTitle.innerHTML += '.'
@@ -126,15 +154,7 @@ function endGameWithDrawResult()
     // Update the Game-bar gameBarTitle message!
     gameBarTitle.innerHTML = 'Game is Draw, Wait to start a new Game';
 
-    // Simple Loader.
-    setInterval(function () {
-        gameBarTitle.innerHTML += '.'
-    }, 1000);
-
-    // Finally, Reload the Page to start a new Game.
-    setTimeout(function () {
-        location.reload();
-    }, 4000);
+    loadingNewGame();
 }
 
 /**
