@@ -1,6 +1,7 @@
-let inGame = true;
-let currentPlayer = 'X';
-let gameBarTitle = document.querySelector('.gameBarTitle');
+let inGame             = true;
+let currentPlayer      = 'X';
+let gameBarTitle       = document.querySelector('.gameBarTitle');
+let filledSquaresCount = 0 ;
 
 /*
  * Start the X/O Game!
@@ -29,6 +30,9 @@ function game(square_id)
         gameBarTitle.innerHTML = '[ X ] is a next player.';
     }
 
+    // Increment the filled squares count.
+    filledSquaresCount++;
+
     // Checking the Winner after Last Play.
     checkWinner();
 }
@@ -55,6 +59,15 @@ function getOddResult(odd) {
 }
 
 function checkWinner() {
+
+    // Check if the Game not Closed.
+    // by checking if the inGame flag marked as true ( in a game! )
+    // but the count of the filled squares is 9 ( 9 squares - [Max Game table squares count.])
+    // which means no available squares to play, so, we will close the game by a Draw result.
+    if (inGame && filledSquaresCount === 9) {
+        endGameWithDrawResult();
+    }
+
     // Get all available odds that can make someone Winning the Game.
     let odds = getOdds();
 
@@ -89,10 +102,31 @@ function finalizingGameAndShowResult(successOdd) {
     }, 4000);
 
     // Mark the Success Odd with a black background color.
-
     successOdd.forEach(function(square_id) {
-        document.getElementById('square-' + square_id).style.backgroundColor = '#000';
+        document
+            .getElementById('square-' + square_id)
+            .style
+            .backgroundColor = '#000';
     })
+}
+
+function endGameWithDrawResult()
+{
+    // Stop the Game mode.
+    inGame = false;
+
+    // Update the Game-bar gameBarTitle message!
+    gameBarTitle.innerHTML = 'Game is Draw, Wait to start a new Game';
+
+    // Simple Loader.
+    setInterval(function () {
+        gameBarTitle.innerHTML += '.'
+    }, 1000);
+
+    // Finally, Reload the Page to start a new Game.
+    setTimeout(function () {
+        location.reload();
+    }, 4000);
 }
 
 /**
